@@ -1,5 +1,6 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
+import { Link } from "react-router-dom";
 export default function TelaInicial() {
   return (
     <Container>
@@ -15,7 +16,9 @@ export default function TelaInicial() {
             placeholder="  senha"
           ></input>
           <button type="submit">Entrar</button>
+          <Link to="/cadastro">
           <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
+          </Link>
         </AlinhamentoInputButton>
       </form>
     </Container>
@@ -29,6 +32,7 @@ button{
     width:303px;
     height: 45px;
     margin-top:5px;
+    margin-bottom:20px;
     border-radius: 5px;
     border:none;
     background-color:#52B6FF;
@@ -48,7 +52,6 @@ display:flex;
 align-items:center;
 flex-direction:column;
 .cadastro{
-    margin-top:25px;
     color:#52B6FF;
     font-family: 'Lexend Deca';
     font-style: normal;

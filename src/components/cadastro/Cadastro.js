@@ -1,5 +1,6 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
+import { Link } from "react-router-dom";
 export default function Cadastro(){
     return(
         <Container>
@@ -11,9 +12,11 @@ export default function Cadastro(){
           <input className="input" type="email" placeholder="  email"></input>
           <input className="input" type="password" placeholder="  senha"></input>
           <input className="input" type="text" placeholder="  email"></input>
-          <input className="input" type="url" placeholder="  senha"></input>
+          <input className="input" type="url" placeholder="  foto"></input>
           <button type="submit">Cadastrar</button>
+          <Link to="/">
           <span className="cadastro">Já tem uma conta? Faça login!</span>
+          </Link>
         </AlinhamentoInputButton>
       </form>
     </Container>
@@ -27,6 +30,7 @@ button{
     width:303px;
     height: 45px;
     margin-top:5px;
+    margin-bottom:20px;
     border-radius: 5px;
     border:none;
     background-color:#52B6FF;
@@ -46,7 +50,6 @@ display:flex;
 align-items:center;
 flex-direction:column;
 .cadastro{
-    margin-top:25px;
     color:#52B6FF;
     font-family: 'Lexend Deca';
     font-style: normal;
