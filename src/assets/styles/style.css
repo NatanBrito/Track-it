@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+    --fonte:'Roboto', sans-serif;
+}
+.input{
+    width:303px;
+    height: 45px;
+    margin-top:5px;
+    border-radius: 5px;
+    border: 1px solid #D4D4D4;
+}
