@@ -1,6 +1,6 @@
 
 export default function Historico(){
-    return(
-        <h1>historico</h1>
-    )
+return(
+    <h1>historico</h1>
+)
 }

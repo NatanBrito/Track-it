@@ -1,7 +1,11 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 export default function TelaInicial() {
+  const component = <ThreeDots height={45} color={'white'} width={50}/>
+  const [animationButton,setAnimationButton]=useState(true)
   return (
     <Container>
       <LogoTipo>
@@ -15,7 +19,7 @@ export default function TelaInicial() {
             type="password"
             placeholder="  senha"
           ></input>
-          <button type="submit">Entrar</button>
+          <button onClick={()=>{setAnimationButton(!animationButton)}} type="submit">{animationButton? "Entrar" : component}</button>
           <Link to="/cadastro">
           <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
           </Link>
@@ -40,6 +44,9 @@ button{
     cursor:pointer;
     font-family: 'Lexend Deca';
     font-style: normal;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 button:hover{
     background-color:#0b7ccc;

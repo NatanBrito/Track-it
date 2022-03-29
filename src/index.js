@@ -9,8 +9,8 @@ import react from "react";
 import reactDom from "react-dom";
 import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
+import Footer from "./components/Footer/Footer";
 
-// importar rotas e montar as rotas 
 function App(){
     return(
         <>
@@ -21,6 +21,7 @@ function App(){
         <Route path="/habitos" element={<Habitos />}/>
         <Route path="/hoje" element={<Hoje />}/>
         <Route path="/historico" element={<Historico />}/>
+        <Route path="/footer" element={<Footer />}/>        
         </Routes>
         </BrowserRouter>
         </>
