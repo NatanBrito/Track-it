@@ -1,19 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { render } from "react-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import styledComponents from "styled-components";
 
-export default function Footer() {
-  const percentage = 50;
+export default function Footer({done}) {
+  const percentage = done;
   return (
     <>
       <AllFooter>
+        <Link to="/habitos">
         <span>Hábitos</span>
+        </Link>
         <CirculoFooter>
           <CircularProgressbar
             value={percentage}
-            text={`Hoje`}
+            text={'hoje'}
             background
             backgroundPadding={6}
             styles={buildStyles({
@@ -24,7 +27,9 @@ export default function Footer() {
             })}
           />
         </CirculoFooter>
+        <Link to="./historico">
         <span>Histórico</span>
+        </Link>
       </AllFooter>
     </>
   );
@@ -52,5 +57,12 @@ font-style: normal;
 font-weight: 400;
 font-size: 18px;
 color: #52B6FF;
+}
+a{
+  text-decoration:none;
+}
+span:hover{
+  transition: 0.3s;
+  font-size:21px;
 }
 `;

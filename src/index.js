@@ -9,9 +9,6 @@ import react from "react";
 import reactDom from "react-dom";
 import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-
 function App(){
     return(
         <>
@@ -21,10 +18,7 @@ function App(){
         <Route path="/cadastro" element={<Cadastro />}/>
         <Route path="/habitos" element={<Habitos />}/>
         <Route path="/hoje" element={<Hoje />}/>
-        <Route path="/historico" element={<Historico />}/>
-        <Route path="/footer" element={<Footer />}/>   
-        <Route path="/Header" element={<Header />}/>   
-
+        <Route path="/historico" element={<Historico />}/>   
         </Routes>
         </BrowserRouter>
         </>

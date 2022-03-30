@@ -11,9 +11,12 @@ export default function TelaInicial() {
   const [animationButton, setAnimationButton] = useState(true);
   function apagaInfos() {
     setInfoInputs({ email: "", password: "" });
+    setAnimationButton(true);
   }
   function infoPost(e) {
     e.preventDefault();
+    setAnimationButton(false);
+    console.log(1)
     const post =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
     const objPost = {
@@ -56,14 +59,7 @@ export default function TelaInicial() {
             placeholder="  senha"
             required
           ></input>
-          <button
-            onClick={() => {
-              setAnimationButton(!animationButton);
-            }}
-            type="submit"
-          >
-            {animationButton ? "Entrar" : component}
-          </button>
+          <button type="submit">{animationButton ? "Entrar" : component}</button>
           <Link to="/header">
             <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
           </Link>

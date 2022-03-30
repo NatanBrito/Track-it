@@ -1,11 +1,11 @@
 import styledComponents from "styled-components";
 import Escritaimg from "../../assets/imgs/TrackIt.png";
-export default function Header() {
+export default function Header({img}) {
   return (
     <Container>
       <Topo>
         <span>TrackIt</span>
-        <img className="imgUser" src={Escritaimg} alt="xx" />
+        <img className="imgUser" src={img} alt="xx" />
       </Topo>
     </Container>
   );
