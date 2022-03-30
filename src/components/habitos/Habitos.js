@@ -3,17 +3,18 @@ import Escritaimg from "../../assets/imgs/TrackIt.png";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Habito from "../Habito/Habito";
+import HabitoCheck from "../HabitoCheck/HabitoCheck";
 export default function Habitos() {
   return (
     <Fundo>
     <Container>
-      <Header img={Escritaimg}/>
+      <Header img={Escritaimg} />
       <ButtonHabitos>
         <span>Meus hábitos</span>
         <button>+</button>
       </ButtonHabitos>
       <CriarHabitos>
-      <Habito />
+          <HabitoCheck />
       </CriarHabitos>
 
       <Texto>

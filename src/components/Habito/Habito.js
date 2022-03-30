@@ -72,7 +72,7 @@ justify-content:flex-start;
 button{
     width: 30px;
     height: 30px;
-    margin-right:5px;
+    margin-right:3px;
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     box-sizing: border-box;
