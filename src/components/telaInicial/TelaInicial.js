@@ -13,11 +13,12 @@ export default function TelaInicial() {
       </LogoTipo>
       <form>
         <AlinhamentoInputButton>
-          <input className="input" type="email" placeholder="  email"></input>
+          <input className="input" type="email" placeholder="  email" required></input>
           <input
             className="input"
             type="password"
             placeholder="  senha"
+            required
           ></input>
           <button onClick={()=>{setAnimationButton(!animationButton)}} type="submit">{animationButton? "Entrar" : component}</button>
           <Link to="/cadastro">
