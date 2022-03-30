@@ -87,6 +87,10 @@ flex-direction:column;
     font-size: 14px;
     text-decoration-line: underline;
 }
+span{
+  margin-bottom:50px;
+
+}
 `;
 const LogoTipo = styledComponents.div`
 display:flex;

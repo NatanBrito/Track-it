@@ -8,7 +8,8 @@ export default function Footer(){
     const percentage = 50;
     return(
         <>
-        <h1>historico</h1>
+        <AllFooter>
+          <span>Hábitos</span>
         <CirculoFooter>
          <CircularProgressbar
         value={percentage}
@@ -23,7 +24,8 @@ export default function Footer(){
         })}
       />
         </CirculoFooter>
-
+        <span>Histórico</span>
+        </AllFooter>
         </>
 
     )
@@ -31,4 +33,25 @@ export default function Footer(){
 const CirculoFooter= styledComponents.div`
 width:91px;
 height:91px;
+margin-bottom: 40px;
+`
+const AllFooter=styledComponents.div`
+display:flex;
+justify-content:space-evenly;
+align-items:center;
+width: 100%;
+height: 70px;
+background-color:#E5E5E5;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+span{
+  
+font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+color: #52B6FF;
+}
 `
