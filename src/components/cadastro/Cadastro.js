@@ -4,47 +4,86 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export default function Cadastro(){
- const navigate=useNavigate();
-  const [infoInputs,setInfoInputs]=useState({email:'',password:'',name:'',image:''})
-  function sendPost(e){
+export default function Cadastro() {
+  const navigate = useNavigate();
+  const [infoInputs, setInfoInputs] = useState({
+    email: "",
+    password: "",
+    name: "",
+    image: "",
+  });
+  function sendPost(e) {
     e.preventDefault();
- const post="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
-    const objPost={
+    const post =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+    const objPost = {
       email: infoInputs.email,
       name: infoInputs.name,
       image: infoInputs.image,
-      password: infoInputs.password
-    }
-  const promise= axios.post(post,objPost)
-  promise.then(response=>{alert("cadastrado com sucesso");navigate("/")})
-  promise.catch(err =>{console.log(err.response)})
+      password: infoInputs.password,
+    };
+    const promise = axios.post(post, objPost);
+    promise.then((response) => {
+      alert("cadastrado com sucesso");
+      navigate("/");
+    });
+    promise.catch((err) => {
+      console.log(err.response);
+    });
   }
-    return(
-        <Container>
+  return (
+    <Container>
       <LogoTipo>
         <img src={Logo} alt="aaa" />
       </LogoTipo>
-          <form onSubmit={sendPost}>
+      <form onSubmit={sendPost}>
         <AlinhamentoInputButton>
-          <input className="input" type="email"
-            value={infoInputs.email} onChange={(e)=>{setInfoInputs({...infoInputs,email:e.target.value});}}
-            placeholder="  email" required></input>
-          <input className="input" type="password"
-          value={infoInputs.password} onChange={(e)=>{setInfoInputs({...infoInputs,password:e.target.value})}}
-          placeholder="  senha" required></input>
-          <input className="input" type="text"
-           value={infoInputs.name} onChange={(e)=>{setInfoInputs({...infoInputs,name:e.target.value});}}
-          placeholder="  nome" required></input>
-          <input className="input" type="url"
-          value={infoInputs.image} onChange={(e)=>{setInfoInputs({...infoInputs,image:e.target.value});}}
-          placeholder="  foto" required></input>
+          <input
+            className="input"
+            type="email"
+            value={infoInputs.email}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, email: e.target.value });
+            }}
+            placeholder="  email"
+            required
+          ></input>
+          <input
+            className="input"
+            type="password"
+            value={infoInputs.password}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, password: e.target.value });
+            }}
+            placeholder="  senha"
+            required
+          ></input>
+          <input
+            className="input"
+            type="text"
+            value={infoInputs.name}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, name: e.target.value });
+            }}
+            placeholder="  nome"
+            required
+          ></input>
+          <input
+            className="input"
+            type="url"
+            value={infoInputs.image}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, image: e.target.value });
+            }}
+            placeholder="  foto"
+            required
+          ></input>
           <button type="submit">Cadastrar</button>
           <span className="cadastro">Já tem uma conta? Faça login!</span>
         </AlinhamentoInputButton>
       </form>
     </Container>
-    )
+  );
 }
 const Container = styledComponents.div`
 

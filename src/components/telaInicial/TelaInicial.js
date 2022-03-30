@@ -5,23 +5,29 @@ import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 export default function TelaInicial() {
-  const Navigate= useNavigate();
-  const component = <ThreeDots height={45} color={'white'} width={50}/>
-  const [infoInputs,setInfoInputs]=useState({email:"",password:""})
-  const [animationButton,setAnimationButton]=useState(true);
-  function apagaInfos(){
-    setInfoInputs({email:'',password:''})
+  const Navigate = useNavigate();
+  const component = <ThreeDots height={45} color={"white"} width={50} />;
+  const [infoInputs, setInfoInputs] = useState({ email: "", password: "" });
+  const [animationButton, setAnimationButton] = useState(true);
+  function apagaInfos() {
+    setInfoInputs({ email: "", password: "" });
   }
-  function infoPost(e){
-  e.preventDefault();
-  const post="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
-  const objPost={
-    email: infoInputs.email,
-    password: infoInputs.password
-  }
-  const promise=axios.post(post,objPost)
-  promise.then(Response =>{Navigate("/hoje")})
-  promise.catch(err=>{alert(" informações inválidas... ");apagaInfos()}  )
+  function infoPost(e) {
+    e.preventDefault();
+    const post =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+    const objPost = {
+      email: infoInputs.email,
+      password: infoInputs.password,
+    };
+    const promise = axios.post(post, objPost);
+    promise.then((Response) => {
+      Navigate("/hoje");
+    });
+    promise.catch((err) => {
+      alert(" informações inválidas... ");
+      apagaInfos();
+    });
   }
   return (
     <Container>
@@ -30,19 +36,36 @@ export default function TelaInicial() {
       </LogoTipo>
       <form onSubmit={infoPost}>
         <AlinhamentoInputButton>
-          <input className="input" type="email"
-          value={infoInputs.email} onChange={(e)=>{setInfoInputs({...infoInputs,email:e.target.value})}}
-          placeholder="  email" required></input>
+          <input
+            className="input"
+            type="email"
+            value={infoInputs.email}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, email: e.target.value });
+            }}
+            placeholder="  email"
+            required
+          ></input>
           <input
             className="input"
             type="password"
-            value={infoInputs.password} onChange={(e)=>{setInfoInputs({...infoInputs,password:e.target.value})}}
+            value={infoInputs.password}
+            onChange={(e) => {
+              setInfoInputs({ ...infoInputs, password: e.target.value });
+            }}
             placeholder="  senha"
             required
           ></input>
-          <button onClick={()=>{setAnimationButton(!animationButton)}} type="submit">{animationButton? "Entrar" : component}</button>
+          <button
+            onClick={() => {
+              setAnimationButton(!animationButton);
+            }}
+            type="submit"
+          >
+            {animationButton ? "Entrar" : component}
+          </button>
           <Link to="/header">
-          <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
+            <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
           </Link>
         </AlinhamentoInputButton>
       </form>

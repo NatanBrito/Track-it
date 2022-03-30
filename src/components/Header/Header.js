@@ -1,21 +1,21 @@
 import styledComponents from "styled-components";
-import Escritaimg from "../../assets/imgs/TrackIt.png"
-export default function Header(){
-return(
+import Escritaimg from "../../assets/imgs/TrackIt.png";
+export default function Header() {
+  return (
     <Container>
-        <Topo>
+      <Topo>
         <span>TrackIt</span>
-        <img className="imgUser" src={Escritaimg} alt="xx"/>
-        </Topo>
+        <img className="imgUser" src={Escritaimg} alt="xx" />
+      </Topo>
     </Container>
-)
+  );
 }
-const Container=styledComponents.div`
+const Container = styledComponents.div`
 margin-left:18px;
 margin-right:18px;
-`
+`;
 
-const Topo= styledComponents.div`
+const Topo = styledComponents.div`
 background-color:#126BA5;
 width: 100%;
 height: 70px;
@@ -42,4 +42,4 @@ span{
     margin-left:18px;
 
 }
-`
+`;
