@@ -60,7 +60,7 @@ export default function TelaInicial() {
             required
           ></input>
           <button type="submit">{animationButton ? "Entrar" : component}</button>
-          <Link to="/header">
+          <Link to="/cadastro">
             <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
           </Link>
         </AlinhamentoInputButton>

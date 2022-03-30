@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import Habito from "../Habito/Habito";
 export default function Habitos() {
   return (
+    <Fundo>
     <Container>
       <Header img={Escritaimg}/>
       <ButtonHabitos>
@@ -23,8 +24,15 @@ export default function Habitos() {
       </Texto>
       <Footer done="45"/>
     </Container>
+    </Fundo>
   );
 }
+const Fundo=styledComponents.div`
+width: 100vw;
+height: 100vh;
+background-color:#E5E5E5;
+
+`
 const CriarHabitos=styledComponents.div`
 
 `
