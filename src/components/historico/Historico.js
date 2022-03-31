@@ -2,10 +2,13 @@ import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
 import Escritaimg from "../../assets/imgs/TrackIt.png";
 import styledComponents from "styled-components";
+import { useContext } from "react";
+import { ImageContext } from "../../context/imgHeader";
 export default function Historico(){
+    const {image}=useContext(ImageContext)
 return(
     <>
-    <Header img={Escritaimg}/>
+    <Header img={image}/>
     <Container>
     <ButtonHabitos>
         <span>Histórico</span>

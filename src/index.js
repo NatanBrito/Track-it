@@ -10,19 +10,22 @@ import reactDom from "react-dom";
 import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
 import TokenProvider from "./context/Token";
+import ImageProvider from "./context/imgHeader";
 function App(){
     return(
         <>
         <TokenProvider>
+        <ImageProvider>
         <BrowserRouter>
         <Routes>
-        <Route path="/" element={<TelaInicial />} />
         <Route path="/cadastro" element={<Cadastro />}/>
+        <Route path="/" element={<TelaInicial />} />
         <Route path="/habitos" element={<Habitos />}/>
         <Route path="/hoje" element={<Hoje />}/>
         <Route path="/historico" element={<Historico />}/>   
         </Routes>
         </BrowserRouter>
+        </ImageProvider>
         </TokenProvider>
         </>
     )

@@ -8,8 +8,11 @@ import axios from "axios";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
 import { useState } from "react";
 import { TokenContext } from "../../context/Token";
+
 import { useEffect } from "react";
+import { ImageContext } from "../../context/imgHeader";
 export default function Habitos() {
+  const {image}=useContext(ImageContext)
   const {token}= useContext(TokenContext);
   const [gerandoHabito, setGerandoHabito] = useState(false);
   const [ativando, setAtivando] = useState(true);
@@ -22,13 +25,13 @@ export default function Habitos() {
      }
    }
     const promise= axios.get(get,config)
-    promise.then(response =>{setHabitosApi(response.data)})
+    promise.then(response =>{setHabitosApi(response.data); console.log(response)})
     promise.catch(err => console.log("erro fi"+err))
   },[])
   return (
     <Fundo>
       <Container>
-        <Header img={Escritaimg} />
+        <Header img={image} />
         <ButtonHabitos>
           <span>Meus hábitos</span>
           <button

@@ -5,8 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import { TokenContext } from "../../context/Token";
+import { ImageContext } from "../../context/imgHeader";
 export default function TelaInicial() {
   const {token, setToken}= useContext(TokenContext);
+  const {setImage}=useContext(ImageContext)
   const Navigate = useNavigate();
   const component = <ThreeDots height={45} color={"white"} width={50} />;
   const [infoInputs, setInfoInputs] = useState({ email: "", password: "" });
@@ -29,6 +31,7 @@ export default function TelaInicial() {
     promise.then((response) => {
       console.log(token)
       setToken(response.data.token);
+      setImage(response.data.image);
       Navigate("/hoje");
     });
     promise.catch((err) => {

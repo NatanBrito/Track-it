@@ -6,13 +6,15 @@ import HabitoFechado from "../HabitoFechado/HabitoFechado";
 import HabitoCheck from "../HabitoCheck/HabitoCheck";
 import { useState, useContext } from "react";
 import { TokenContext } from "../../context/Token";
+import { ImageContext } from "../../context/imgHeader";
 
 export default function Hoje(){
     const {token}= useContext(TokenContext)
+    const {image}=useContext(ImageContext)
     console.log(token)
     return(
         <Container>
-        <Header img={escritaimg}/>
+        <Header img={image}/>
         <HabitoCheck />
         <Footer done="75" />
         </Container>
