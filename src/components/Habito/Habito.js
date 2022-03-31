@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import axios from "axios";
 import { TokenContext } from "../../context/Token";
-export default function Habito({callback, callbackAtivar}){
+export default function Habito({callback, callbackAtivar,callbackHabito}){
 const [habitoText,setHabitoText]=useState("")
 const [habitoDay,setHabitoDay]=useState([])
 const [click,setClick]=useState(false)
@@ -46,7 +46,7 @@ promise.catch(err =>{console.log(err.response.data)})
 function reGet(){
     const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
     const promise= axios.get(get,config)
-    promise.then(response =>{ alert("deu bom")})
+    promise.then(response =>{ callbackHabito(response.data); callback(false);callbackAtivar(true);})
     promise.catch(err => console.log("erro fi"+err))
 }
 function toggleClicado(e){

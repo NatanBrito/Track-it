@@ -1,8 +1,17 @@
 import styledComponents from "styled-components";
-import trash from "../../assets/imgs/Vector (2).png"
+import trash from "../../assets/imgs/Vector (2).png";
+import axios from "axios";
+import { useContext } from "react";
+import { TokenContext } from "../../context/Token";
+import { confirmAlert } from "react-confirm-alert";
 
-export default function HabitoFechado({habito,dias}) {
-    
+export default function HabitoFechado({habito,dias,id,callbackHabito}) {
+    const {token}= useContext(TokenContext)
+    const config = {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+      }
     return(
         <>
             <HabitosFechados>
@@ -19,13 +28,31 @@ export default function HabitoFechado({habito,dias}) {
                             <button className={toggleClicado(6)?"clicado" :""} dia="6" >S</button>
                         </WeekDays>
                     </HabitoEDias>
-                        <img src={trash} alt="trash"/>
+                        <img onClick={()=>{excluiHabito(id);}} src={trash} alt="trash"/>
+                        
                 </HabitoFechados>
             </HabitosFechados>
         </>
 
 
-    )
+)
+   function excluiHabito(id){
+        let confirmacao= window.confirm("voce tem certeza??")
+        
+    if(confirmacao){
+        const promise=axios.delete (`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)
+    promise.then(response =>{reRenderizando()})
+    promise.catch(err =>{console.log("fail cahorrão")})
+    } else{
+        return ""
+    }
+                  }
+    function reRenderizando(){
+        const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+        const promise = axios.get(get,config)
+        promise.then(response =>callbackHabito(response.data))
+    }
+    
     function toggleClicado(dia){
         for(let i=0;i<dias.length;i++){
             if(dias[i] === dia){

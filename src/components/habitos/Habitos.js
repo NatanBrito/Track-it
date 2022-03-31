@@ -22,7 +22,7 @@ export default function Habitos() {
      }
    }
     const promise= axios.get(get,config)
-    promise.then(response =>{ console.log(response.data); setHabitosApi(response.data)})
+    promise.then(response =>{setHabitosApi(response.data)})
     promise.catch(err => console.log("erro fi"+err))
   },[])
   return (
@@ -48,6 +48,7 @@ export default function Habitos() {
         <CriarHabitos>
           {gerandoHabito ? (
             <Habito
+              callbackHabito={(value)=>setHabitosApi(value)}
               callback={(value) => setGerandoHabito(value)}
               callbackAtivar={(value) => setAtivando(value)}
             />
@@ -56,8 +57,10 @@ export default function Habitos() {
             ""
           )}
           {habitosApi.map(habito =>{
+            console.log(habito.id)
             return(
-              <HabitoFechado key={habito.name} habito={habito.name} dias={habito.days}/>
+              <HabitoFechado callbackHabito={(value)=>setHabitosApi(value)}
+               id={habito.id} key={habito.name + habito.id} habito={habito.name} dias={habito.days}/>
             )
           })}
         </CriarHabitos>
