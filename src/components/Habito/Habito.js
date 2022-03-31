@@ -1,9 +1,18 @@
 import styledComponents from "styled-components";
 import { useState } from "react";
+import { useContext } from "react";
+import axios from "axios";
+import { TokenContext } from "../../context/Token";
 export default function Habito({callback, callbackAtivar}){
 const [habitoText,setHabitoText]=useState("")
 const [habitoDay,setHabitoDay]=useState([])
 const [click,setClick]=useState(false)
+const {token}= useContext(TokenContext)
+const config = {
+    headers: {
+     Authorization: `Bearer ${token}`
+    }
+  }
 return(
     <Container>
      <input className="input" type="text"
@@ -20,10 +29,26 @@ return(
      </WeekDays>
      <SalvarCancelar>
      <span onClick={()=>{ callback(false); callbackAtivar(true)}}>Cancelar</span>
-     <button>Salvar</button>
+     <button onClick={mandandoPraApi}>Salvar</button>
      </SalvarCancelar>
     </Container>
 )
+function mandandoPraApi(){
+const post="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    const habito={
+	name: habitoText,
+	days: habitoDay
+}
+const promise= axios.post(post,habito,config)
+promise.then(Response=>{ reGet()})
+promise.catch(err =>{console.log(err.response.data)})
+}
+function reGet(){
+    const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+    const promise= axios.get(get,config)
+    promise.then(response =>{ alert("deu bom")})
+    promise.catch(err => console.log("erro fi"+err))
+}
 function toggleClicado(e){
  for(let i=0;i<habitoDay.length;i++){
      if(habitoDay[i] === e.target.attributes.dia.value){

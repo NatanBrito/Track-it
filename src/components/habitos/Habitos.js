@@ -2,13 +2,29 @@ import styledComponents from "styled-components";
 import Escritaimg from "../../assets/imgs/TrackIt.png";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { useContext } from "react";
 import Habito from "../Habito/Habito";
-import HabitoCheck from "../HabitoCheck/HabitoCheck";
+import axios from "axios";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
 import { useState } from "react";
+import { TokenContext } from "../../context/Token";
+import { useEffect } from "react";
 export default function Habitos() {
+  const {token}= useContext(TokenContext);
   const [gerandoHabito, setGerandoHabito] = useState(false);
   const [ativando, setAtivando] = useState(true);
+  const [habitosApi,setHabitosApi]=useState([])
+  useEffect(()=>{
+    const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+    const config = {
+     headers: {
+      Authorization: `Bearer ${token}`
+     }
+   }
+    const promise= axios.get(get,config)
+    promise.then(response =>{ console.log(response.data); setHabitosApi(response.data)})
+    promise.catch(err => console.log("erro fi"+err))
+  },[])
   return (
     <Fundo>
       <Container>
@@ -21,6 +37,7 @@ export default function Habitos() {
                 ? () => {
                     setGerandoHabito(!gerandoHabito);
                     setAtivando(!ativando);
+
                   }
                 : console.log("xx")
             }
@@ -34,16 +51,22 @@ export default function Habitos() {
               callback={(value) => setGerandoHabito(value)}
               callbackAtivar={(value) => setAtivando(value)}
             />
+            
           ) : (
             ""
           )}
+          {habitosApi.map(habito =>{
+            return(
+              <HabitoFechado key={habito.name} habito={habito.name} dias={habito.days}/>
+            )
+          })}
         </CriarHabitos>
 
         <Texto>
-          <span>
+          {habitosApi.length === 0 ?<span>
             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
             começar a trackear!
-          </span>
+          </span> : ""}
         </Texto>
         <Footer done="45" />
       </Container>
