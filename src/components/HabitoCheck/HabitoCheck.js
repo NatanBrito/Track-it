@@ -40,16 +40,19 @@ background-color:#E5E5E5;
 
 `
 const Checkbox=styledComponents.div`
-.checkBox{
-    border-radius:50%;
-}
 input{
 margin-top:10px;
 margin-left:15px;
 width: 69px;
 height: 69px;
-background-color:#8FC549;
-}`
+background-color:green;
+color:green;
+}
+input:checked{
+    color:green;
+    background-color:green;
+}
+`
 
 const P=styledComponents.div`
 margin-top:10px;

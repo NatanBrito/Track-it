@@ -1,5 +1,4 @@
 import styledComponents from "styled-components";
-import Escritaimg from "../../assets/imgs/TrackIt.png";
 export default function Header({img}) {
   return (
     <Container>

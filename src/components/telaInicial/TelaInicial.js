@@ -1,10 +1,12 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import { TokenContext } from "../../context/Token";
 export default function TelaInicial() {
+  const {token, setToken}= useContext(TokenContext);
   const Navigate = useNavigate();
   const component = <ThreeDots height={45} color={"white"} width={50} />;
   const [infoInputs, setInfoInputs] = useState({ email: "", password: "" });

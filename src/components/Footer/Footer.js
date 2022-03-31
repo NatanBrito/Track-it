@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { render } from "react-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import styledComponents from "styled-components";
@@ -14,6 +13,7 @@ export default function Footer({done}) {
         <span>Hábitos</span>
         </Link>
         <CirculoFooter>
+          <Link to="/hoje">
           <CircularProgressbar
             value={percentage}
             text={'hoje'}
@@ -26,6 +26,7 @@ export default function Footer({done}) {
               trailColor: "transparent",
             })}
           />
+          </Link>
         </CirculoFooter>
         <Link to="/historico">
         <span>Histórico</span>

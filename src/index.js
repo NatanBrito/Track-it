@@ -9,9 +9,11 @@ import react from "react";
 import reactDom from "react-dom";
 import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
+import TokenProvider from "./context/Token";
 function App(){
     return(
         <>
+        <TokenProvider>
         <BrowserRouter>
         <Routes>
         <Route path="/" element={<TelaInicial />} />
@@ -21,6 +23,7 @@ function App(){
         <Route path="/historico" element={<Historico />}/>   
         </Routes>
         </BrowserRouter>
+        </TokenProvider>
         </>
     )
 }

@@ -5,39 +5,60 @@ import Footer from "../Footer/Footer";
 import Habito from "../Habito/Habito";
 import HabitoCheck from "../HabitoCheck/HabitoCheck";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
+import { useState } from "react";
 export default function Habitos() {
+  const [gerandoHabito, setGerandoHabito] = useState(false);
+  const [ativando, setAtivando] = useState(true);
   return (
     <Fundo>
-    <Container>
-      <Header img={Escritaimg} />
-      <ButtonHabitos>
-        <span>Meus hábitos</span>
-        <button>+</button>
-      </ButtonHabitos>
-      <CriarHabitos>
-      <HabitoFechado />
-      </CriarHabitos>
+      <Container>
+        <Header img={Escritaimg} />
+        <ButtonHabitos>
+          <span>Meus hábitos</span>
+          <button
+            onClick={
+              ativando
+                ? () => {
+                    setGerandoHabito(!gerandoHabito);
+                    setAtivando(!ativando);
+                  }
+                : console.log("xx")
+            }
+          >
+            +
+          </button>
+        </ButtonHabitos>
+        <CriarHabitos>
+          {gerandoHabito ? (
+            <Habito
+              callback={(value) => setGerandoHabito(value)}
+              callbackAtivar={(value) => setAtivando(value)}
+            />
+          ) : (
+            ""
+          )}
+        </CriarHabitos>
 
-      <Texto>
-        <span>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </span>
-      </Texto>
-      <Footer done="45"/>
-    </Container>
+        <Texto>
+          <span>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </span>
+        </Texto>
+        <Footer done="45" />
+      </Container>
     </Fundo>
   );
 }
-const Fundo=styledComponents.div`
+const Fundo = styledComponents.div`
 width: 100vw;
 height: 100vh;
 background-color:#E5E5E5;
 
-`
-const CriarHabitos=styledComponents.div`
+`;
+const CriarHabitos = styledComponents.div`
 
-`
+`;
 
 const Container = styledComponents.div`
 margin-left:18px;
@@ -80,4 +101,3 @@ const ButtonHabitos = styledComponents.div`
       
       }
     `;
-

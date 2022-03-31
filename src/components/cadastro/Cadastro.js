@@ -1,6 +1,6 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -79,7 +79,9 @@ export default function Cadastro() {
             required
           ></input>
           <button type="submit">Cadastrar</button>
+          <Link to="/">
           <span className="cadastro">Já tem uma conta? Faça login!</span>
+          </Link>
         </AlinhamentoInputButton>
       </form>
     </Container>

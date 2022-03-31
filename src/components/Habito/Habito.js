@@ -1,6 +1,6 @@
 import styledComponents from "styled-components";
 import { useState } from "react";
-export default function Habito(){
+export default function Habito({callback, callbackAtivar}){
 const [habitoText,setHabitoText]=useState("")
 const [habitoDay,setHabitoDay]=useState([])
 const [click,setClick]=useState(false)
@@ -19,7 +19,7 @@ return(
      <button className={habitoDay.includes("6")  ?"clicado" :""} dia="6" onClick={(e)=> toggleClicado(e)}>S</button>
      </WeekDays>
      <SalvarCancelar>
-     <span>Cancelar</span>
+     <span onClick={()=>{ callback(false); callbackAtivar(true)}}>Cancelar</span>
      <button>Salvar</button>
      </SalvarCancelar>
     </Container>
@@ -50,6 +50,7 @@ span{
     font-weight: 400;
     font-size: 16px;
     margin-right:23px;
+    cursor:pointer;
 }
 button{
     width: 84px;
