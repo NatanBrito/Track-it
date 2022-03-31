@@ -26,7 +26,9 @@ export default function TelaInicial() {
       password: infoInputs.password,
     };
     const promise = axios.post(post, objPost);
-    promise.then((Response) => {
+    promise.then((response) => {
+      console.log(token)
+      setToken(response.data.token);
       Navigate("/hoje");
     });
     promise.catch((err) => {

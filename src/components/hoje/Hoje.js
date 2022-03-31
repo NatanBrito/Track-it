@@ -4,7 +4,12 @@ import escritaimg from "../../assets/imgs/TrackIt.png";
 import styledComponents from "styled-components";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
 import HabitoCheck from "../HabitoCheck/HabitoCheck";
+import { useState, useContext } from "react";
+import { TokenContext } from "../../context/Token";
+
 export default function Hoje(){
+    const {token}= useContext(TokenContext)
+    console.log(token)
     return(
         <Container>
         <Header img={escritaimg}/>
