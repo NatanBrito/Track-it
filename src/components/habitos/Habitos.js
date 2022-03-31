@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Habito from "../Habito/Habito";
 import HabitoCheck from "../HabitoCheck/HabitoCheck";
+import HabitoFechado from "../HabitoFechado/HabitoFechado";
 export default function Habitos() {
   return (
     <Fundo>
@@ -14,7 +15,7 @@ export default function Habitos() {
         <button>+</button>
       </ButtonHabitos>
       <CriarHabitos>
-          <HabitoCheck />
+      <HabitoFechado />
       </CriarHabitos>
 
       <Texto>

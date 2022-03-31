@@ -5,10 +5,6 @@ export default function HabitoFechado() {
     
     return(
         <>
-            <DiaConcluido>
-            <span className="title">Segunda, 17/05</span>
-            <span className="subtitle">Nenhum hábito concluído ainda</span>
-            </DiaConcluido>
             <HabitosFechados>
                 <HabitoFechados>
                     <HabitoEDias>
@@ -32,26 +28,6 @@ export default function HabitoFechado() {
     )
 }
 
-const DiaConcluido = styledComponents.div`
-   display:flex;
-   flex-direction:column;
-    margin-top: 100px;
-    margin-bottom:7px;
-        span{
-            color: #126BA5;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 23px;
-        }
-        .subtitle{
-            color:#BABABA;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-        }
-        `
 const WeekDays=styledComponents.div`
 width:303px;
 display:flex;
@@ -90,7 +66,7 @@ width: 340px;
 height: 94px;
 display:flex;
 border-radius: 5px;
-background-color: tomato;
+background-color: #ffffff;
 img{
     width:13px;
     height:15px;
