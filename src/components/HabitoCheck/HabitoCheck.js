@@ -1,30 +1,40 @@
 import styledComponents from "styled-components";
 import Check from "../../assets/imgs/Vector.svg";
+import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
 import { useState,useContext } from "react";
 import { TokenContext } from "../../context/Token";
-export default function HabitoCheck({id,done,nome,maiorsequencia,sequencia}){
-    const [clicado,setClicado]=useState(false)
+export default function HabitoCheck({id,done,nome,maiorsequencia,sequencia,callback}){
+    const component = <ThreeDots height={45} color={"white"} width={50} />;
     const {token}= useContext(TokenContext)
+    const [clicado,setClicado]=useState(false)
     const config = {
         headers: {
          Authorization: `Bearer ${token}`
         }
       }
    console.log(done)
+   function reload(){
+    const Get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+    const promise=axios.get(Get,config)
+    promise.then(response=> {callback(response.data);setClicado(false)})
+   }
    function  colocaCheck(){
+    setClicado(true)
     console.log("verdaderia")  
     const postCheck=`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
     const promise=axios.post(postCheck,{},config);
-    promise.then(response =>{console.log("sucesso")})
-    promise.catch(err=>{console.log(err.response.data)})  
+    promise.then(response =>{reload()})
+    promise.catch(err=>{alert("algo deu errado...")})  
        }   
     function tiracheck(){
+        setClicado(true)
         console.log("falsa")
+
         const postUncheck=`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
         const promise=axios.post(postUncheck,{},config);
-        promise.then(response =>{console.log("Removido")})
-        promise.catch(err=>{console.log(err.response.data)}) 
+        promise.then(response =>{reload()})
+        promise.catch(err=>{alert("algo deu errado...")}) 
     }
     
     return(
@@ -33,13 +43,13 @@ export default function HabitoCheck({id,done,nome,maiorsequencia,sequencia}){
             <BoxEsquerda>
                 <span>{nome}</span>
                 <P>
-                <p>Sequência atual: {sequencia}dias</p>
-                <p>Seu recorde: {maiorsequencia} dias</p>
+                <p className={sequencia!==0 && sequencia>=maiorsequencia ? "textGreen" : ""}>Sequência atual: {sequencia} dias</p>
+                <p className={sequencia!==0 && sequencia>=maiorsequencia ? "textGreen" : ""}>Seu recorde: {maiorsequencia} dias</p>
                 </P>
             </BoxEsquerda>
             <Concon>
             <Checkbox className={done ? "green" : ""} onClick={done?tiracheck:colocaCheck}>
-              <img src={Check} alt="cachorrada"/>
+              {clicado ? component:<img src={Check} alt="cachorrada"/>}
             </Checkbox>
             </Concon>
          </Habito>
@@ -50,6 +60,7 @@ export default function HabitoCheck({id,done,nome,maiorsequencia,sequencia}){
 const Concon=styledComponents.div`
 .green{
     background-color:green;
+    color:green;
 }
 `
 const Checkbox=styledComponents.div`
@@ -94,8 +105,10 @@ font-weight: 400;
 font-size: 20px;
 color:#666666;
 }
+.textGreen{
+color:green;
+}
 p{
-    
 font-family: 'Lexend Deca';
 font-style: normal;
 font-weight: 400;

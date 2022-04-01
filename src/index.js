@@ -11,11 +11,13 @@ import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
 import TokenProvider from "./context/Token";
 import ImageProvider from "./context/imgHeader";
+import FooterNumProvider from "./context/FooterNum";
 function App(){
     return(
         <>
         <TokenProvider>
         <ImageProvider>
+        <FooterNumProvider>
         <BrowserRouter>
         <Routes>
         <Route path="/cadastro" element={<Cadastro />}/>
@@ -25,6 +27,7 @@ function App(){
         <Route path="/historico" element={<Historico />}/>   
         </Routes>
         </BrowserRouter>
+        </FooterNumProvider>
         </ImageProvider>
         </TokenProvider>
         </>

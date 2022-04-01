@@ -6,10 +6,15 @@ import { useEffect,useState, useContext } from "react";
 import { TokenContext } from "../../context/Token";
 import { ImageContext } from "../../context/imgHeader";
 import axios from "axios";
+import dayjs from "dayjs";
+import { FooterNumContext } from "../../context/FooterNum";
 export default function Hoje(){
-    const [habitosDiario,setHabitosDiario]=useState([])
-    const {token}= useContext(TokenContext)
-    const {image}=useContext(ImageContext)
+    require("dayjs/locale/pt-br");
+    const {footerNum,setFooterNum}=useContext(FooterNumContext);
+    const [habitosDiario,setHabitosDiario]=useState([]);
+    const {token}= useContext(TokenContext);
+    const {image}=useContext(ImageContext);
+    const [feito,setFeito]=useState(0);
     const config = {
         headers: {
          Authorization: `Bearer ${token}`
@@ -21,23 +26,26 @@ export default function Hoje(){
         promise.then(Response =>{console.log(Response); setHabitosDiario(Response.data)})
         promise.catch(err=>{console.log("erro "+ err)})
     },[])
+
     return(
         <Container>
+            <Header img={image}  />
              <DiaConcluido>
-                <span className="title">Segunda, 17/05</span>
+                <span className="title">{dayjs().locale('pt-br').format('dddd, DD/MM')}</span>
                 <span className="subtitle">Nenhum hábito concluído ainda</span>
             </DiaConcluido>
             <ContainerHabito>
         {habitosDiario.map(habito=>{
+            console.log("sou o feito"+feito)
             const {id,currentSequence,done,highestSequence,name}=habito;
              return(
-        <HabitoCheck  key={id} id={id} nome={habito.name} done={done}
+        <HabitoCheck  callback={(value)=>{setHabitosDiario(value)}}
+          key={id} id={id} nome={habito.name} done={done}
          maiorsequencia={highestSequence} sequencia={currentSequence} />
              )
         })}
         </ContainerHabito>
-        <Header img={image}  />
-        <Footer done="75" />
+        <Footer done={footerNum} />
         </Container>
          )
     

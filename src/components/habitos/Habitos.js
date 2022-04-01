@@ -70,7 +70,7 @@ export default function Habitos() {
             começar a trackear!
           </span> : ""}
         </Texto>
-        <Footer done="45" />
+        <Footer done="100" />
       </Container>
     </Fundo>
   );
