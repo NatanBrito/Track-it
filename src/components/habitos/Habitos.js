@@ -1,15 +1,11 @@
 import styledComponents from "styled-components";
-import Escritaimg from "../../assets/imgs/TrackIt.png";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { useContext } from "react";
 import Habito from "../Habito/Habito";
 import axios from "axios";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
 import { TokenContext } from "../../context/Token";
-
-import { useEffect } from "react";
 import { ImageContext } from "../../context/imgHeader";
 export default function Habitos() {
   const {image}=useContext(ImageContext)

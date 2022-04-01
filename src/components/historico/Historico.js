@@ -1,6 +1,5 @@
 import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
-import Escritaimg from "../../assets/imgs/TrackIt.png";
 import styledComponents from "styled-components";
 import { useContext } from "react";
 import { ImageContext } from "../../context/imgHeader";

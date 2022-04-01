@@ -1,63 +1,76 @@
-import styledComponents from "styled-components"
-
-
-export default function HabitoCheck(){
+import styledComponents from "styled-components";
+import Check from "../../assets/imgs/Vector.svg";
+import axios from "axios";
+import { useState,useContext } from "react";
+import { TokenContext } from "../../context/Token";
+export default function HabitoCheck({id,done,nome,maiorsequencia,sequencia}){
+    const [clicado,setClicado]=useState(false)
+    const {token}= useContext(TokenContext)
+    const config = {
+        headers: {
+         Authorization: `Bearer ${token}`
+        }
+      }
+   console.log(done)
+   function  colocaCheck(){
+    console.log("verdaderia")  
+    const postCheck=`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
+    const promise=axios.post(postCheck,{},config);
+    promise.then(response =>{console.log("sucesso")})
+    promise.catch(err=>{console.log(err.response.data)})  
+       }   
+    function tiracheck(){
+        console.log("falsa")
+        const postUncheck=`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
+        const promise=axios.post(postUncheck,{},config);
+        promise.then(response =>{console.log("Removido")})
+        promise.catch(err=>{console.log(err.response.data)}) 
+    }
+    
     return(
-        <Container>
-             <DiaConcluido>
-                <span className="title">Segunda, 17/05</span>
-                <span className="subtitle">Nenhum hábito concluído ainda</span>
-            </DiaConcluido>
+            
         <Habito>
             <BoxEsquerda>
-                <span>Ler 1 capítulo de livro</span>
+                <span>{nome}</span>
                 <P>
-                <p>Sequência atual: 4 dias</p>
-                <p>Seu recorde: 4 dias</p>
+                <p>Sequência atual: {sequencia}dias</p>
+                <p>Seu recorde: {maiorsequencia} dias</p>
                 </P>
             </BoxEsquerda>
-            <Checkbox>
-              <input className="checkBox" type="checkbox"></input> 
+            <Concon>
+            <Checkbox className={done ? "green" : ""} onClick={done?tiracheck:colocaCheck}>
+              <img src={Check} alt="cachorrada"/>
             </Checkbox>
+            </Concon>
          </Habito>
-         <Habito>
-            <BoxEsquerda>
-                <span>Ler 1 capítulo de livro</span>
-                <P>
-                <p>Sequência atual: 4 dias</p>
-                <p>Seu recorde: 4 dias</p>
-                </P>
-            </BoxEsquerda>
-            <Checkbox>
-              <input className="checkBox" type="checkbox"></input> 
-            </Checkbox>
-         </Habito>
-        </Container>
     )
 }
-const Container=styledComponents.div`
-background-color:#E5E5E5;
 
+
+const Concon=styledComponents.div`
+.green{
+    background-color:green;
+}
 `
 const Checkbox=styledComponents.div`
-input{
 margin-top:10px;
 margin-left:15px;
 width: 69px;
 height: 69px;
-background-color:green;
-color:green;
-}
-input:checked{
-    color:green;
-    background-color:green;
-}
+background-color:#EBEBEB;
+border: 1 solid #E7E7E7;
+border-radius:5px;
+display:flex;
+justify-content:center;
+align-items:center;
 `
 
 const P=styledComponents.div`
 margin-top:10px;
 `
 const BoxEsquerda= styledComponents.div`
+width:240px;
+height:64px;
 padding:15px;
 span{
 margin-top:10px;
@@ -90,23 +103,3 @@ font-size: 13px;
 color: #666666;
 }
 `
-const DiaConcluido = styledComponents.div`
-   display:flex;
-   flex-direction:column;
-    margin-top: 100px;
-    margin-bottom:7px;
-        span{
-            color: #126BA5;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 23px;
-        }
-        .subtitle{
-            color:#BABABA;
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-        }
-        `

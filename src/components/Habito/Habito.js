@@ -3,11 +3,14 @@ import { useState } from "react";
 import { useContext } from "react";
 import axios from "axios";
 import { TokenContext } from "../../context/Token";
+import { ThreeDots } from "react-loader-spinner";
 export default function Habito({callback, callbackAtivar,callbackHabito}){
 const [habitoText,setHabitoText]=useState("")
 const [habitoDay,setHabitoDay]=useState([])
 const [click,setClick]=useState(false)
 const {token}= useContext(TokenContext)
+const component = <ThreeDots height={45} color={"white"} width={50} />;
+const [animationButton, setAnimationButton] = useState(true);
 const config = {
     headers: {
      Authorization: `Bearer ${token}`
@@ -29,11 +32,12 @@ return(
      </WeekDays>
      <SalvarCancelar>
      <span onClick={()=>{ callback(false); callbackAtivar(true)}}>Cancelar</span>
-     <button onClick={mandandoPraApi}>Salvar</button>
+     <button onClick={mandandoPraApi} >{animationButton ? "Salvar" : component}</button>
      </SalvarCancelar>
     </Container>
 )
 function mandandoPraApi(){
+setAnimationButton(false);
 const post="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const habito={
 	name: habitoText,
@@ -41,9 +45,10 @@ const post="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 }
 const promise= axios.post(post,habito,config)
 promise.then(Response=>{ reGet()})
-promise.catch(err =>{console.log(err.response.data)})
+promise.catch(err =>{alert("ocorreu algum problema...");setAnimationButton(true);})
 }
 function reGet(){
+    setAnimationButton(true);
     const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
     const promise= axios.get(get,config)
     promise.then(response =>{ callbackHabito(response.data); callback(false);callbackAtivar(true);})
@@ -84,6 +89,9 @@ button{
     border-radius: 5px;
     border:none;
     color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 `
 const WeekDays=styledComponents.div`
