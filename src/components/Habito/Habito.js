@@ -87,7 +87,7 @@ export default function Habito({ callback, callbackAtivar, callbackHabito }) {
         >
           Cancelar
         </span>
-        <button onClick={disable ?console.log(""): mandandoPraApi}>
+        <button className={disable?"opaco":""} onClick={disable ?console.log(""): mandandoPraApi}>
           {animationButton ? "Salvar" : component}
         </button>
       </SalvarCancelar>
@@ -141,6 +141,9 @@ width:303px;
 display:flex;
 justify-content:flex-end;
 align-items:center;
+.opaco{
+  opacity:0.5;
+}
 span{
     color: #52B6FF;
     font-family: 'Lexend Deca';

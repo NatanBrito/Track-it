@@ -8,6 +8,7 @@ export default function TelaInicial() {
   const Navigate = useNavigate();
   const component = <ThreeDots height={45} color={"white"} width={50} />;
   const [infoInputs, setInfoInputs] = useState({ email: "", password: "" });
+  const [disable,setDisable]=useState(false);
   const [animationButton, setAnimationButton] = useState(true);
   function apagaInfos() {
     setInfoInputs({ email: "", password: "" });
@@ -15,6 +16,7 @@ export default function TelaInicial() {
   }
   function infoPost(e) {
     e.preventDefault();
+    setDisable(true);
     setAnimationButton(false);
     const post =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
@@ -26,11 +28,13 @@ export default function TelaInicial() {
     promise.then((response) => {
       const LocalToken = localStorage.setItem("token", response.data.token);
       const LocalImage = localStorage.setItem("image", response.data.image);
+      setDisable(false)
       Navigate("/hoje");
     });
     promise.catch((err) => {
       alert(" informações inválidas... ");
       apagaInfos();
+      setDisable(false)
     });
   }
   return (
@@ -60,7 +64,7 @@ export default function TelaInicial() {
             placeholder="  senha"
             required
           ></input>
-          <button type="submit">
+          <button className={disable?"opaco":""} type="submit">
             {animationButton ? "Entrar" : component}
           </button>
           <Link to="/cadastro">
@@ -90,12 +94,16 @@ button{
     display:flex;
     justify-content:center;
     align-items:center;
+    .opaco{
+      opacity:0.5;
+    }
 }
 button:hover{
-    background-color:#0b7ccc;
-    transition: 0.5s;
+  background-color:#0b7ccc;
+  transition: 0.5s;
 
 }
+
 `;
 const AlinhamentoInputButton = styledComponents.div`
 display:flex;
