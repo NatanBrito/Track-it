@@ -101,6 +101,9 @@ width: 340px;
 height: 94px;
 display:flex;
 margin-top:10px;
+HabitoFechados:nth-last-child(1){
+    margin-bottom:100px;
+}
 border-radius: 5px;
 background-color: #ffffff;
 img{
@@ -108,9 +111,7 @@ img{
     height:15px;
     margin-top:15px;
 }
-HabitoFechados:nth-last-child(1){
-    margin-bottom:100px;
-}
+
 `
 
 const HabitosFechados=styledComponents.div`

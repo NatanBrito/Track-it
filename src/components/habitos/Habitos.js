@@ -77,18 +77,20 @@ export default function Habitos() {
   );
 }
 const Fundo = styledComponents.div`
-width: 100vw;
-height: 100vh;
+width: 100%;
+height: 100%;
 background-color:#E5E5E5;
 
 `;
 const CriarHabitos = styledComponents.div`
-overflow:scroll;
-height:430px;
+margin-bottom:11px;
+
 `;
 
 
 const Container = styledComponents.div`
+margin-bottom:70px;
+
 margin-left:18px;
 margin-right:18px;
 `;
