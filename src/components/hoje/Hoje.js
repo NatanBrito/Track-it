@@ -110,7 +110,7 @@ const DiaConcluido = styledComponents.div`
 const Container = styledComponents.div`
 margin-left:18px;
 margin-right:18px;
-margin-bottom:90px;
+margin-bottom:420px;
 
 .green{
     color:green;

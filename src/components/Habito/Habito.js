@@ -6,6 +6,8 @@ export default function Habito({ callback, callbackAtivar, callbackHabito }) {
   const [habitoText, setHabitoText] = useState("");
   const [habitoDay, setHabitoDay] = useState([]);
   const [click, setClick] = useState(false);
+  const [disable,setDisable]=useState(false);
+
   const ToToken = localStorage.getItem("token");
   const component = <ThreeDots height={45} color={"white"} width={50} />;
   const [animationButton, setAnimationButton] = useState(true);
@@ -85,7 +87,7 @@ export default function Habito({ callback, callbackAtivar, callbackHabito }) {
         >
           Cancelar
         </span>
-        <button onClick={mandandoPraApi}>
+        <button onClick={disable ?console.log(""): mandandoPraApi}>
           {animationButton ? "Salvar" : component}
         </button>
       </SalvarCancelar>
@@ -93,6 +95,7 @@ export default function Habito({ callback, callbackAtivar, callbackHabito }) {
   );
   function mandandoPraApi() {
     setAnimationButton(false);
+    setDisable(true)
     const post =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const habito = {
@@ -102,10 +105,13 @@ export default function Habito({ callback, callbackAtivar, callbackHabito }) {
     const promise = axios.post(post, habito, config);
     promise.then((Response) => {
       reGet();
+      setDisable(false)
     });
     promise.catch((err) => {
       alert("ocorreu algum problema...");
       setAnimationButton(true);
+      setDisable(false)
+
     });
   }
   function reGet() {

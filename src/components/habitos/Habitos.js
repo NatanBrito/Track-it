@@ -88,16 +88,18 @@ export default function Habitos() {
 }
 const Fundo = styledComponents.div`
 width: 100%;
-height: calc 100%;
-background-color:#E5E5E5;
+height:100%;
 overflow:hidden;
+
+background-color:#E5E5E5;
 `;
 const CriarHabitos = styledComponents.div`
 `;
 const Container = styledComponents.div`
-margin-bottom:90px;
+margin-bottom:420px;
 margin-left:18px;
 margin-right:18px;
+
 `;
 const Texto = styledComponents.div`
 span{
