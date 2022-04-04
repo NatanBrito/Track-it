@@ -9,4 +9,8 @@
     border-radius: 5px;
     border: 1px solid #D4D4D4;
 }
+::-webkit-scrollbar{
+    height: 0px;
+    width: 0px;
+  }
 

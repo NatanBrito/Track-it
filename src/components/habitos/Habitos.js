@@ -44,6 +44,12 @@ export default function Habitos() {
             +
           </button>
         </ButtonHabitos>
+        <Texto>
+          {habitosApi.length === 0 ?<span>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </span> : ""}
+        </Texto>
         <CriarHabitos>
           {gerandoHabito ? (
             <Habito
@@ -64,12 +70,7 @@ export default function Habitos() {
           })}
         </CriarHabitos>
 
-        <Texto>
-          {habitosApi.length === 0 ?<span>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-            começar a trackear!
-          </span> : ""}
-        </Texto>
+        
         <Footer done="100" />
       </Container>
     </Fundo>
@@ -82,8 +83,10 @@ background-color:#E5E5E5;
 
 `;
 const CriarHabitos = styledComponents.div`
-
+overflow:scroll;
+height:430px;
 `;
+
 
 const Container = styledComponents.div`
 margin-left:18px;
