@@ -44,6 +44,7 @@ export default function Hoje(){
       }
 
     return(
+        <Fundo>
         <Container>
             <Header img={image}  />
              <DiaConcluido>
@@ -63,9 +64,15 @@ export default function Hoje(){
         </ContainerHabito>
         <Footer done={footerNum} />
         </Container>
+         </Fundo>
          )
     
 }
+const Fundo=styledComponents.div`
+width:100%;
+background-color:#E5E5E5;
+
+`
 const ContainerHabito=styledComponents.div`
 background-color:#E5E5E5;
 
@@ -93,6 +100,8 @@ const DiaConcluido = styledComponents.div`
 const Container = styledComponents.div`
 margin-left:18px;
 margin-right:18px;
+margin-bottom:90px;
+
 .green{
     color:green;
 }
