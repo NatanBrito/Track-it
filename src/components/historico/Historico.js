@@ -3,10 +3,12 @@ import Footer from "../Footer/Footer"
 import styledComponents from "styled-components";
 import { useContext } from "react";
 import { ImageContext } from "../../context/imgHeader";
+import { FooterNumContext } from "../../context/FooterNum";
 export default function Historico(){
     const {image}=useContext(ImageContext)
+    const {footerNum}=useContext(FooterNumContext);
 return(
-    <>
+    <Fundo>
     <Header img={image}/>
     <Container>
     <ButtonHabitos>
@@ -15,10 +17,15 @@ return(
       <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span>
     </Container>
 
-    <Footer done="10"/>
-    </>
+    <Footer done={footerNum}/>
+    </Fundo>
 )
 }
+const Fundo =styledComponents.div`
+width:100vw;
+height:100vh;
+background-color:#E5E5E5;
+`
 const Container =styledComponents.div`
 margin-left:15px;
 span{

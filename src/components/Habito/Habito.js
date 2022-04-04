@@ -20,7 +20,7 @@ return(
     <Container>
      <input className="input" type="text"
      value={habitoText} onChange={e=>{setHabitoText(e.target.value); console.log(habitoText)}}
-     placeholder="nome do hábito"></input>
+     placeholder="  nome do hábito"></input>
      <WeekDays>
      <button className={habitoDay.includes("0") ?"clicado" :""} dia="0" onClick={(e)=> toggleClicado(e)}>D</button>
      <button className={habitoDay.includes("1")  ?"clicado" :""} dia="1" onClick={(e)=> toggleClicado(e)}>S</button>
@@ -108,6 +108,7 @@ button{
     height: 30px;
     margin-right:3px;
     background: #FFFFFF;
+    color:#DBDBDB;
     border: 1px solid #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
@@ -116,7 +117,7 @@ button{
 
 `
  const Container=styledComponents.div`
-    background-color: #126BA5;
+    background-color: white;
     width: 340px;
     height: 180px;
     border-radius: 5px;

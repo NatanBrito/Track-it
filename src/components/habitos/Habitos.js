@@ -7,7 +7,9 @@ import HabitoFechado from "../HabitoFechado/HabitoFechado";
 import { useState,useEffect,useContext } from "react";
 import { TokenContext } from "../../context/Token";
 import { ImageContext } from "../../context/imgHeader";
+import { FooterNumContext } from "../../context/FooterNum";
 export default function Habitos() {
+  const {footerNum}=useContext(FooterNumContext);
   const {image}=useContext(ImageContext)
   const {token}= useContext(TokenContext);
   const [gerandoHabito, setGerandoHabito] = useState(false);
@@ -71,7 +73,7 @@ export default function Habitos() {
         </CriarHabitos>
 
         
-        <Footer done="100" />
+        <Footer done={footerNum} />
       </Container>
     </Fundo>
   );
