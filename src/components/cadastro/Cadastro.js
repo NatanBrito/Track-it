@@ -27,9 +27,7 @@ export default function Cadastro() {
       alert("cadastrado com sucesso");
       navigate("/");
     });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
+    promise.catch((err) => {});
   }
   return (
     <Container>
@@ -80,7 +78,7 @@ export default function Cadastro() {
           ></input>
           <button type="submit">Cadastrar</button>
           <Link to="/">
-          <span className="cadastro">Já tem uma conta? Faça login!</span>
+            <span className="cadastro">Já tem uma conta? Faça login!</span>
           </Link>
         </AlinhamentoInputButton>
       </form>

@@ -1,5 +1,5 @@
 import styledComponents from "styled-components";
-export default function Header({img}) {
+export default function Header({ img }) {
   return (
     <Container>
       <Topo>
@@ -13,7 +13,6 @@ const Container = styledComponents.div`
 margin-left:18px;
 margin-right:18px;
 `;
-
 const Topo = styledComponents.div`
 background-color:#126BA5;
 width: 100%;

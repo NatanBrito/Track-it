@@ -1,32 +1,32 @@
-import Header from "../Header/Header"
-import Footer from "../Footer/Footer"
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import styledComponents from "styled-components";
 import { useContext } from "react";
-import { ImageContext } from "../../context/imgHeader";
 import { FooterNumContext } from "../../context/FooterNum";
-export default function Historico(){
-    const {image}=useContext(ImageContext)
-    const {footerNum}=useContext(FooterNumContext);
-return(
+export default function Historico() {
+  const Toimage = localStorage.getItem("image");
+  const { footerNum } = useContext(FooterNumContext);
+  return (
     <Fundo>
-    <Header img={image}/>
-    <Container>
-    <ButtonHabitos>
-        <span>Histórico</span>
-      </ButtonHabitos>
-      <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span>
-    </Container>
+      <Header img={Toimage} />
+      <Container>
+        <ButtonHabitos>
+          <span>Histórico</span>
+        </ButtonHabitos>
+        <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span>
+      </Container>
 
-    <Footer done={footerNum}/>
+      <Footer done={footerNum} />
     </Fundo>
-)
+  );
 }
-const Fundo =styledComponents.div`
+const Fundo = styledComponents.div`
 width:100vw;
 height:100vh;
 background-color:#E5E5E5;
-`
-const Container =styledComponents.div`
+overflow:hidden;
+`;
+const Container = styledComponents.div`
 margin-left:15px;
 span{
     font-family: 'Lexend Deca';
@@ -35,7 +35,7 @@ font-weight: 400;
 font-size: 18px;
 color: #666666;
 }
-`
+`;
 const ButtonHabitos = styledComponents.div`
     display:flex;
     justify-content:space-between;

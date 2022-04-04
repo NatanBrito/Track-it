@@ -4,32 +4,32 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import styledComponents from "styled-components";
 
-export default function Footer({done}) {
+export default function Footer({ done }) {
   const percentage = done;
   return (
     <>
       <AllFooter>
         <Link to="/habitos">
-        <span>Hábitos</span>
+          <span>Hábitos</span>
         </Link>
         <CirculoFooter>
           <Link to="/hoje">
-          <CircularProgressbar
-            value={percentage}
-            text={'hoje'}
-            background
-            backgroundPadding={6}
-            styles={buildStyles({
-              backgroundColor: "#3e98c7",
-              textColor: "#fff",
-              pathColor: "#fff",
-              trailColor: "transparent",
-            })}
-          />
+            <CircularProgressbar
+              value={percentage}
+              text={"hoje"}
+              background
+              backgroundPadding={6}
+              styles={buildStyles({
+                backgroundColor: "#3e98c7",
+                textColor: "#fff",
+                pathColor: "#fff",
+                trailColor: "transparent",
+              })}
+            />
           </Link>
         </CirculoFooter>
         <Link to="/historico">
-        <span>Histórico</span>
+          <span>Histórico</span>
         </Link>
       </AllFooter>
     </>

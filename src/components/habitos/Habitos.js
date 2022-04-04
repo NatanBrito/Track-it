@@ -4,32 +4,35 @@ import Footer from "../Footer/Footer";
 import Habito from "../Habito/Habito";
 import axios from "axios";
 import HabitoFechado from "../HabitoFechado/HabitoFechado";
-import { useState,useEffect,useContext } from "react";
-import { TokenContext } from "../../context/Token";
-import { ImageContext } from "../../context/imgHeader";
+import { useState, useEffect, useContext } from "react";
 import { FooterNumContext } from "../../context/FooterNum";
 export default function Habitos() {
-  const {footerNum}=useContext(FooterNumContext);
-  const {image}=useContext(ImageContext)
-  const {token}= useContext(TokenContext);
+  const { footerNum } = useContext(FooterNumContext);
   const [gerandoHabito, setGerandoHabito] = useState(false);
   const [ativando, setAtivando] = useState(true);
-  const [habitosApi,setHabitosApi]=useState([])
-  useEffect(()=>{
-    const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+  const [habitosApi, setHabitosApi] = useState([]);
+  const ToToken = localStorage.getItem("token");
+  const Toimage = localStorage.getItem("image");
+  useEffect(() => {
+    const get =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
     const config = {
-     headers: {
-      Authorization: `Bearer ${token}`
-     }
-   }
-    const promise= axios.get(get,config)
-    promise.then(response =>{setHabitosApi(response.data); console.log(response)})
-    promise.catch(err => console.log("erro fi"+err))
-  },[])
+      headers: {
+        Authorization: `Bearer ${ToToken}`,
+      },
+    };
+    const promise = axios.get(get, config);
+    promise.then((response) => {
+      setHabitosApi(response.data);
+    });
+    promise.catch((err) =>
+      alert("voce escolheu um dia e escreveu um hábito...?")
+    );
+  }, []);
   return (
     <Fundo>
       <Container>
-        <Header img={image} />
+        <Header img={Toimage} />
         <ButtonHabitos>
           <span>Meus hábitos</span>
           <button
@@ -38,7 +41,6 @@ export default function Habitos() {
                 ? () => {
                     setGerandoHabito(!gerandoHabito);
                     setAtivando(!ativando);
-
                   }
                 : console.log("xx")
             }
@@ -47,32 +49,38 @@ export default function Habitos() {
           </button>
         </ButtonHabitos>
         <Texto>
-          {habitosApi.length === 0 ?<span>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-            começar a trackear!
-          </span> : ""}
+          {habitosApi.length === 0 ? (
+            <span>
+              Você não tem nenhum hábito cadastrado ainda. Adicione um hábito
+              para começar a trackear!
+            </span>
+          ) : (
+            ""
+          )}
         </Texto>
         <CriarHabitos>
           {gerandoHabito ? (
             <Habito
-              callbackHabito={(value)=>setHabitosApi(value)}
+              callbackHabito={(value) => setHabitosApi(value)}
               callback={(value) => setGerandoHabito(value)}
               callbackAtivar={(value) => setAtivando(value)}
             />
-            
           ) : (
             ""
           )}
-          {habitosApi.map(habito =>{
-            console.log(habito.id)
-            return(
-              <HabitoFechado callbackHabito={(value)=>setHabitosApi(value)}
-               id={habito.id} key={habito.name + habito.id} habito={habito.name} dias={habito.days}/>
-            )
+          {habitosApi.map((habito) => {
+            return (
+              <HabitoFechado
+                callbackHabito={(value) => setHabitosApi(value)}
+                id={habito.id}
+                key={habito.name + habito.id}
+                habito={habito.name}
+                dias={habito.days}
+              />
+            );
           })}
         </CriarHabitos>
 
-        
         <Footer done={footerNum} />
       </Container>
     </Fundo>
@@ -80,19 +88,14 @@ export default function Habitos() {
 }
 const Fundo = styledComponents.div`
 width: 100%;
-height: 100%;
+height: calc 100%;
 background-color:#E5E5E5;
-
+overflow:hidden;
 `;
 const CriarHabitos = styledComponents.div`
-margin-bottom:11px;
-
 `;
-
-
 const Container = styledComponents.div`
-margin-bottom:70px;
-
+margin-bottom:90px;
 margin-left:18px;
 margin-right:18px;
 `;

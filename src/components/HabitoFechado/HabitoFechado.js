@@ -1,69 +1,87 @@
 import styledComponents from "styled-components";
 import trash from "../../assets/imgs/Vector (2).png";
 import axios from "axios";
-import { useContext } from "react";
-import { TokenContext } from "../../context/Token";
-import { confirmAlert } from "react-confirm-alert";
-
-export default function HabitoFechado({habito,dias,id,callbackHabito}) {
-    const {token}= useContext(TokenContext)
-    const config = {
-        headers: {
-         Authorization: `Bearer ${token}`
-        }
+export default function HabitoFechado({ habito, dias, id, callbackHabito }) {
+  const ToToken = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${ToToken}`,
+    },
+  };
+  return (
+    <>
+      <HabitosFechados>
+        <HabitoFechados>
+          <HabitoEDias>
+            <span className="nomeHabito">{habito}</span>
+            <WeekDays>
+              <button className={toggleClicado(0) ? "clicado" : ""} dia="0">
+                D
+              </button>
+              <button className={toggleClicado(1) ? "clicado" : ""} dia="1">
+                S
+              </button>
+              <button className={toggleClicado(2) ? "clicado" : ""} dia="2">
+                T
+              </button>
+              <button className={toggleClicado(3) ? "clicado" : ""} dia="3">
+                Q
+              </button>
+              <button className={toggleClicado(4) ? "clicado" : ""} dia="4">
+                Q
+              </button>
+              <button className={toggleClicado(5) ? "clicado" : ""} dia="5">
+                S
+              </button>
+              <button className={toggleClicado(6) ? "clicado" : ""} dia="6">
+                S
+              </button>
+            </WeekDays>
+          </HabitoEDias>
+          <img
+            onClick={() => {
+              excluiHabito(id);
+            }}
+            src={trash}
+            alt="trash"
+          />
+        </HabitoFechados>
+      </HabitosFechados>
+    </>
+  );
+  function excluiHabito(id) {
+    let confirmacao = window.confirm("voce tem certeza??");
+    if (confirmacao) {
+      const promise = axios.delete(
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,
+        config
+      );
+      promise.then((response) => {
+        reRenderizando();
+      });
+      promise.catch((err) => {
+        alert("algo deu errado... tente novamente");
+      });
+    } else {
+      return "";
+    }
+  }
+  function reRenderizando() {
+    const get =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    const promise = axios.get(get, config);
+    promise.then((response) => callbackHabito(response.data));
+  }
+  function toggleClicado(dia) {
+    for (let i = 0; i < dias.length; i++) {
+      if (dias[i] === dia) {
+        return true;
       }
-    return(
-        <>
-            <HabitosFechados>
-                <HabitoFechados>
-                    <HabitoEDias>
-                        <span className="nomeHabito">{habito}</span>
-                        <WeekDays>
-                            <button className={ toggleClicado(0)?"clicado" :""} dia="0" >D</button>
-                            <button className={toggleClicado(1) ?"clicado" :""} dia="1" >S</button>
-                            <button className={toggleClicado(2)?"clicado" :""} dia="2" >T</button>
-                            <button className={toggleClicado(3) ?"clicado" :""} dia="3" >Q</button>
-                            <button className={toggleClicado(4)?"clicado" :""} dia="4" >Q</button>
-                            <button className={toggleClicado(5) ?"clicado" :""} dia="5" >S</button>
-                            <button className={toggleClicado(6)?"clicado" :""} dia="6" >S</button>
-                        </WeekDays>
-                    </HabitoEDias>
-                        <img onClick={()=>{excluiHabito(id);}} src={trash} alt="trash"/>
-                        
-                </HabitoFechados>
-            </HabitosFechados>
-        </>
-
-
-)
-   function excluiHabito(id){
-        let confirmacao= window.confirm("voce tem certeza??")
-        
-    if(confirmacao){
-        const promise=axios.delete (`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`,config)
-    promise.then(response =>{reRenderizando()})
-    promise.catch(err =>{console.log("fail cahorrão")})
-    } else{
-        return ""
     }
-                  }
-    function reRenderizando(){
-        const get="https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
-        const promise = axios.get(get,config)
-        promise.then(response =>callbackHabito(response.data))
-    }
-    
-    function toggleClicado(dia){
-        for(let i=0;i<dias.length;i++){
-            if(dias[i] === dia){
-                console.log(dia)
-                return  true
-               }
-            }
-            return false
+    return false;
+  }
 }
-}
-const WeekDays=styledComponents.div`
+const WeekDays = styledComponents.div`
 width:303px;
 display:flex;
 margin-top:8px;
@@ -82,9 +100,8 @@ button{
     border-radius: 5px;
 
       }
-
-`
-const  HabitoEDias = styledComponents.div`
+`;
+const HabitoEDias = styledComponents.div`
 margin-left:15px;
 margin-top:10px;
 span{
@@ -95,8 +112,8 @@ font-size: 20px;
 color: #666666;
 width:270px;
 }
-`
-const HabitoFechados=styledComponents.div`
+`;
+const HabitoFechados = styledComponents.div`
 width: 340px;
 height: 94px;
 display:flex;
@@ -110,10 +127,8 @@ img{
     width:13px;
     height:15px;
     margin-top:15px;
+    cursor:pointer;
 }
-
-`
-
-const HabitosFechados=styledComponents.div`
-
-`
+`;
+const HabitosFechados = styledComponents.div`
+`;

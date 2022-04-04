@@ -5,18 +5,13 @@ import Cadastro from "./components/cadastro/Cadastro";
 import Habitos from "./components/habitos/Habitos";
 import Hoje from "./components/hoje/Hoje";
 import Historico from "./components/historico/Historico";
-import react from "react";
 import reactDom from "react-dom";
 import "./assets/styles/reset.css"
 import "./assets/styles/style.css"
-import TokenProvider from "./context/Token";
-import ImageProvider from "./context/imgHeader";
 import FooterNumProvider from "./context/FooterNum";
 function App(){
     return(
         <>
-        <TokenProvider>
-        <ImageProvider>
         <FooterNumProvider>
         <BrowserRouter>
         <Routes>
@@ -28,8 +23,6 @@ function App(){
         </Routes>
         </BrowserRouter>
         </FooterNumProvider>
-        </ImageProvider>
-        </TokenProvider>
         </>
     )
 }

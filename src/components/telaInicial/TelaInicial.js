@@ -1,14 +1,10 @@
 import styledComponents from "styled-components";
 import Logo from "../../assets/imgs/Group.png";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
-import { TokenContext } from "../../context/Token";
-import { ImageContext } from "../../context/imgHeader";
 export default function TelaInicial() {
-  const {token, setToken}= useContext(TokenContext);
-  const {setImage}=useContext(ImageContext)
   const Navigate = useNavigate();
   const component = <ThreeDots height={45} color={"white"} width={50} />;
   const [infoInputs, setInfoInputs] = useState({ email: "", password: "" });
@@ -20,7 +16,6 @@ export default function TelaInicial() {
   function infoPost(e) {
     e.preventDefault();
     setAnimationButton(false);
-    console.log(1)
     const post =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
     const objPost = {
@@ -29,9 +24,8 @@ export default function TelaInicial() {
     };
     const promise = axios.post(post, objPost);
     promise.then((response) => {
-      console.log(token)
-      setToken(response.data.token);
-      setImage(response.data.image);
+      const LocalToken = localStorage.setItem("token", response.data.token);
+      const LocalImage = localStorage.setItem("image", response.data.image);
       Navigate("/hoje");
     });
     promise.catch((err) => {
@@ -66,7 +60,9 @@ export default function TelaInicial() {
             placeholder="  senha"
             required
           ></input>
-          <button type="submit">{animationButton ? "Entrar" : component}</button>
+          <button type="submit">
+            {animationButton ? "Entrar" : component}
+          </button>
           <Link to="/cadastro">
             <span className="cadastro">Não tem uma conta? Cadastre-se!</span>
           </Link>
